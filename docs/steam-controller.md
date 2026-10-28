@@ -98,6 +98,18 @@ Of course you will have access to all described shortcuts.
 
 [See it here](shortcuts.md)
 
+### 4.1. Arcs Deck profile
+
+`Arcs Deck` is a hidden profile used by the Arcs Sandbox Steam Deck edition
+(robot arm control). The app selects it on start and selects your previous
+profile again when it exits. It can only be selected while the app runs, so
+if the app is killed the controller goes back to a normal profile by itself.
+
+- Sticks: X360 sticks
+- `L4` / `R4`: X360 `LB` / `RB`, `L5` / `R5`: X360 `LT` / `RT` (`L1` / `R1` send nothing)
+- Right trackpad: mouse, `R2`: left click, `L2` or right trackpad click: right click
+- Left trackpad: scroll
+
 ## 5. Configure Steam
 
 **Steam Controller** does overwrite default Steam configuration, but if you made changes to some
