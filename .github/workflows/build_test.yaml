@@ -30,8 +30,21 @@ jobs:
         files: ${{ env.RELEASE_NAME }}-debug
         dest: ${{ env.RELEASE_NAME }}-debug.zip
         recursive: true
+    - name: 'Upload Artifact debug.zip'
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug.zip
+        path: ${{ env.RELEASE_NAME }}-debug.zip
+        retention-days: 14
     - name: Install NSIS
-      run: choco install nsis
+      # The Chocolatey community feed sometimes times out, so retry a few times
+      run: |
+        for ($i = 1; $i -le 4; $i++) {
+          choco install nsis -y --no-progress
+          if ($LASTEXITCODE -eq 0) { exit 0 }
+          Start-Sleep -Seconds (15 * $i)
+        }
+        exit 1
     - name: Create debug installer
       uses: joncloud/makensis-action@v3.7
       with:
@@ -41,12 +54,6 @@ jobs:
           /DUSE_WINGET
           /DBUILD_DIR=../${{ env.RELEASE_NAME }}-debug
           /DOUTPUT_FILE=../${{ env.RELEASE_NAME }}-setup-debug.exe
-    - name: 'Upload Artifact debug.zip'
-      uses: actions/upload-artifact@v4
-      with:
-        name: debug.zip
-        path: ${{ env.RELEASE_NAME }}-debug.zip
-        retention-days: 14
     - name: 'Upload Artifact setup-debug.exe'
       uses: actions/upload-artifact@v4
       with:
