@@ -90,10 +90,17 @@ namespace SteamController.Profiles.Predefined
             context.DS4[DS4Controller.ThumbRight] = context.Steam.BtnRightStickPress;
 
             // Triggers
-            context.DS4[DS4Controller.LeftTrigger] = context.Steam.LeftTrigger;
-            context.DS4[DS4Controller.RightTrigger] = context.Steam.RightTrigger;
-            context.DS4[DS4Controller.TriggerLeft] = context.Steam.LeftTrigger > short.MaxValue * 3 / 4;
-            context.DS4[DS4Controller.TriggerRight] = context.Steam.RightTrigger > short.MaxValue * 3 / 4;
+            // Triggers bound in the keybind editor are not passed through
+            if (!Keybinds.KeybindRunner.IsHeld(Keybinds.DeckButton.L2))
+            {
+                context.DS4[DS4Controller.LeftTrigger] = context.Steam.LeftTrigger;
+                context.DS4[DS4Controller.TriggerLeft] = context.Steam.LeftTrigger > short.MaxValue * 3 / 4;
+            }
+            if (!Keybinds.KeybindRunner.IsHeld(Keybinds.DeckButton.R2))
+            {
+                context.DS4[DS4Controller.RightTrigger] = context.Steam.RightTrigger;
+                context.DS4[DS4Controller.TriggerRight] = context.Steam.RightTrigger > short.MaxValue * 3 / 4;
+            }
             context.DS4[DS4Controller.ShoulderLeft] = context.Steam.BtnL1;
             context.DS4[DS4Controller.ShoulderRight] = context.Steam.BtnR1;
 

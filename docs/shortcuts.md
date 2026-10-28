@@ -39,3 +39,23 @@
 | A                          | RETURN                 |                        |                        |                        |                        |
 | B                          | BACKSPACE              |                        |                        |                        |                        |
 | Hold L+R Pad Press (0.6.x) |                        | Toggle Mouse Trackpad  |                        |                        |                        |
+
+## Custom keybinds
+
+Right click the Steam Controller tray icon and pick **Keybinds...** to change the mappings above.
+
+- Click a button on the Steam Deck outline (or its label) and pick what it should do:
+  a keyboard key with Ctrl/Shift/Alt/Win, a mouse button, an X360 or DS4 button,
+  or a Windows action (on-screen keyboard, screenshot, Task Manager, brightness, and more).
+- **Edit** switches between the button alone, **STEAM + button** and **3 dots + button**.
+  A combo you set replaces the built-in one for that button (e.g. STEAM + X), and
+  **Do nothing** disables a built-in combo.
+- **Default (built-in)** keeps the mapping from the table above.
+  **Show built-in mapping of** picks which mode (Desktop, X360, DS4) the outline describes.
+- STEAM, 3 dots and Options cannot be remapped alone, as they drive shortcuts and profile switching.
+- L2/R2 bindings fire on a full trigger pull, and the analog trigger is held back while they do.
+- Create one profile per game, and list the game's process names in **Auto-use for games**
+  (or use **Add running game...**). That profile is used whenever the game is in the foreground;
+  otherwise the profile marked **Use when no game matches** is used. The tray menu
+  **Keybind Profile** switches that default profile.
+- Profiles are saved to `SteamController.keybinds.json` next to `SteamController.exe`.
