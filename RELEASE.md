@@ -8,6 +8,7 @@
 
 - SteamController: Persist and expose in release Lizard{Buttons,Mouse}
 - PerformanceOverlay: Battery-only setting in Performance Overlay (#193)
+- SteamController: SteamOS-like trackpad haptics (ticks when moving a finger, click on press) in Desktop, X360 and DS4
 
 ## 0.7.3
 

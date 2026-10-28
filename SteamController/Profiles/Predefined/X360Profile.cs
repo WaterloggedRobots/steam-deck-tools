@@ -11,6 +11,8 @@ namespace SteamController.Profiles.Predefined
 
         private bool TouchPadsEnabled { get; set; } = true;
 
+        private readonly Helpers.TrackpadHaptics trackpadHaptics = new Helpers.TrackpadHaptics();
+
         public override System.Drawing.Icon Icon
         {
             get
@@ -68,6 +70,7 @@ namespace SteamController.Profiles.Predefined
                 // Default emulation
                 EmulateScrollOnLPad(context);
                 EmulateMouseOnRPad(context, false);
+                trackpadHaptics.Run(context);
             }
             else
             {

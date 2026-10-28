@@ -402,6 +402,7 @@ namespace SteamController
                     X360Haptic = ProfilesSettings.HapticSettings.X360,
                     DS4Shortcuts = ProfilesSettings.DS4BackPanelSettings.Default,
                     DS4Haptic = ProfilesSettings.HapticSettings.DS4,
+                    TrackpadHaptic = ProfilesSettings.TrackpadHapticSettings.Default,
                     Application = Settings.Default,
                     DEBUG = SettingsDebug.Default
                 }
