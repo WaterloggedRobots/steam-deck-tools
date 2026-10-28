@@ -9,6 +9,7 @@
 - SteamController: Persist and expose in release Lizard{Buttons,Mouse}
 - PerformanceOverlay: Battery-only setting in Performance Overlay (#193)
 - SteamController: SteamOS-like trackpad haptics (ticks when moving a finger, click on press) in Desktop, X360 and DS4
+- SteamController: Keybind editor (tray > Keybinds...) with a Steam Deck outline, STEAM + button and 3 dots + button combos, and multiple keybind profiles that switch automatically per game
 
 ## 0.7.3
 

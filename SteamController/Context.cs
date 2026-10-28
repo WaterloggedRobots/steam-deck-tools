@@ -125,7 +125,10 @@ namespace SteamController
             {
                 var profile = CurrentProfile;
                 if (profile is not null)
+                {
+                    Keybinds.KeybindRunner.Run(this, profile);
                     profile.Run(this);
+                }
 
                 return true;
             }

@@ -99,8 +99,11 @@ namespace SteamController.Profiles.Predefined
             context.X360[Xbox360Button.RightThumb] = context.Steam.BtnRightStickPress;
 
             // Triggers
-            context.X360[Xbox360Slider.LeftTrigger] = context.Steam.LeftTrigger;
-            context.X360[Xbox360Slider.RightTrigger] = context.Steam.RightTrigger;
+            // Triggers bound in the keybind editor are not passed through
+            if (!Keybinds.KeybindRunner.IsHeld(Keybinds.DeckButton.L2))
+                context.X360[Xbox360Slider.LeftTrigger] = context.Steam.LeftTrigger;
+            if (!Keybinds.KeybindRunner.IsHeld(Keybinds.DeckButton.R2))
+                context.X360[Xbox360Slider.RightTrigger] = context.Steam.RightTrigger;
             context.X360[Xbox360Button.LeftShoulder] = context.Steam.BtnL1;
             context.X360[Xbox360Button.RightShoulder] = context.Steam.BtnR1;
 

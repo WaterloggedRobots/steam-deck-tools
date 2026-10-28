@@ -22,6 +22,7 @@ namespace SteamController
         Container components = new Container();
         NotifyIcon notifyIcon;
         StartupManager startupManager = new StartupManager(Title);
+        Keybinds.KeybindEditorForm? keybindEditor;
 
         Context context = new Context()
         {
@@ -39,7 +40,8 @@ namespace SteamController
                 new Managers.ProfileSwitcher(),
                 new Managers.SteamConfigsManager(),
                 new Managers.SharedDataManager(),
-                new Managers.SASManager()
+                new Managers.SASManager(),
+                new Managers.KeybindsManager()
             }
         };
 
@@ -135,6 +137,14 @@ namespace SteamController
 
             var settingsItem = contextMenu.Items.Add("&Settings");
             settingsItem.Click += Settings_Click;
+
+            var keybindsItem = contextMenu.Items.Add("&Keybinds...");
+            keybindsItem.Click += delegate { ShowKeybindEditor(); };
+
+            var keybindProfilesItem = new ToolStripMenuItem("Keybind &Profile");
+            keybindProfilesItem.DropDownItems.Add(new ToolStripMenuItem("(none)"));
+            keybindProfilesItem.DropDownOpening += delegate { UpdateKeybindProfilesMenu(keybindProfilesItem); };
+            contextMenu.Items.Add(keybindProfilesItem);
 
             var shortcutsItem = contextMenu.Items.Add("&Shortcuts");
             shortcutsItem.Click += delegate { Dependencies.OpenLink(Dependencies.SDTURL + "/shortcuts.html"); };
@@ -376,6 +386,40 @@ namespace SteamController
                     "Steam Configuration was not updated. Maybe Steam is open?",
                     ToolTipIcon.Warning
                 );
+            }
+        }
+
+        private void ShowKeybindEditor()
+        {
+            if (keybindEditor is null || keybindEditor.IsDisposed)
+            {
+                keybindEditor = new Keybinds.KeybindEditorForm(context);
+                keybindEditor.FormClosed += delegate { keybindEditor = null; };
+                keybindEditor.Show();
+            }
+
+            if (keybindEditor.WindowState == FormWindowState.Minimized)
+                keybindEditor.WindowState = FormWindowState.Normal;
+            keybindEditor.Activate();
+        }
+
+        private void UpdateKeybindProfilesMenu(ToolStripMenuItem menu)
+        {
+            var config = Keybinds.KeybindStore.GetConfig();
+            var active = Keybinds.KeybindStore.Active.Name;
+            var activeGame = Keybinds.KeybindStore.ActiveGame;
+
+            menu.DropDownItems.Clear();
+
+            foreach (var profile in config.Profiles)
+            {
+                var name = profile.Name;
+                var item = new ToolStripMenuItem(name);
+                item.Checked = config.DefaultProfile == name;
+                if (activeGame is not null && active == name)
+                    item.Text += " (active for " + activeGame + ")";
+                item.Click += delegate { Keybinds.KeybindStore.SelectDefault(name); };
+                menu.DropDownItems.Add(item);
             }
         }
 
