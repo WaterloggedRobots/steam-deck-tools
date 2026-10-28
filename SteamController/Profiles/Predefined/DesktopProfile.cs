@@ -6,6 +6,8 @@ namespace SteamController.Profiles.Predefined
     {
         private const String Consumed = "DesktopProfileOwner";
 
+        private readonly Helpers.TrackpadHaptics trackpadHaptics = new Helpers.TrackpadHaptics();
+
         public DesktopProfile()
         {
             IsDesktop = true;
@@ -57,6 +59,7 @@ namespace SteamController.Profiles.Predefined
             EmulateMouseOnRPad(c);
             EmulateMouseOnRStick(c);
             EmulateDPadArrows(c);
+            trackpadHaptics.Run(c);
 
             c.Keyboard[VirtualKeyCode.RETURN] = c.Steam.BtnA;
             c.Keyboard[VirtualKeyCode.BACK] = c.Steam.BtnB;

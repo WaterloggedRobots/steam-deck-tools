@@ -6,6 +6,8 @@ namespace SteamController.Profiles.Predefined
 {
     public class DS4Profile : Default.BackPanelShortcutsProfile
     {
+        private readonly Helpers.TrackpadHaptics trackpadHaptics = new Helpers.TrackpadHaptics();
+
         public override System.Drawing.Icon Icon
         {
             get
@@ -107,6 +109,7 @@ namespace SteamController.Profiles.Predefined
             context.DS4[DS4Controller.TPadClick] = context.Steam.BtnLPadPress || context.Steam.BtnRPadPress;
             context.DS4[DS4Controller.LeftFinger] = GetTPadPoint(context.Steam.LPadX, context.Steam.LPadY);
             context.DS4[DS4Controller.RightFinger] = GetTPadPoint(context.Steam.RPadX, context.Steam.RPadY);
+            trackpadHaptics.Run(context);
 
             return Status.Continue;
         }

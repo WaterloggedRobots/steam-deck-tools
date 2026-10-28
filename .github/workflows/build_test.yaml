@@ -4,6 +4,7 @@ on:
       - '.github/workflows/build_release.yaml'
       - 'RELEASE.md'
   pull_request:
+  workflow_dispatch:
 
 env:
   RELEASE_NAME: SteamDeckTools
